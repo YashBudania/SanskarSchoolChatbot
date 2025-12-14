@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Sanskar School Jaipur Master Chatbot</title>
+<title>Sanskar School Jaipur – Master Chatbot</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: #f2f4f7;
+  background: #eef2f5;
 }
 
 header {
@@ -21,24 +21,28 @@ header {
 
 .hero {
   width: 100%;
-  height: 250px;
+  height: 260px;
   background: url("https://images.unsplash.com/photo-1580582932707-520aed937b7b") center/cover no-repeat;
 }
 
 .chatbox {
-  max-width: 900px;
+  max-width: 950px;
   margin: -40px auto 30px;
   background: white;
   border-radius: 10px;
   padding: 20px;
-  box-shadow: 0 0 8px rgba(0,0,0,0.2);
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
 }
 
 .chat-area {
-  height: 350px;
+  height: 380px;
   overflow-y: auto;
   border: 1px solid #ccc;
   padding: 10px;
+}
+
+.chat-area p {
+  margin: 8px 0;
 }
 
 .input-area {
@@ -69,15 +73,15 @@ button:hover {
 
 <header>
   <h1>Sanskar School Jaipur</h1>
-  <p>Master Information Chatbot</p>
+  <p>Official Information Master Chatbot</p>
 </header>
 
 <div class="hero"></div>
 
 <div class="chatbox">
   <div class="chat-area" id="chat">
-    <p><b>Bot:</b> Hello! Ask me anything about Sanskar School Jaipur.</p>
-    <p><b>Bot:</b> Example topics: principal, address, mission, curriculum, facilities, contact.</p>
+    <p><b>Bot:</b> Hello! I provide official information about Sanskar School Jaipur.</p>
+    <p><b>Bot:</b> You can ask about principal, timings, address, admission, facilities, curriculum, etc.</p>
   </div>
 
   <div class="input-area">
@@ -98,54 +102,86 @@ function send() {
 
   let reply = "";
 
-  // SCHOOL SUMMARY
-  if (q.includes("about school") || q.includes("what is sanskar school")) {
-    reply = "Sanskar School Jaipur is a co‑educational English‑medium senior secondary school established in April 2002 and affiliated to the Central Board of Secondary Education (CBSE), New Delhi. It focuses on holistic student development through academics, values, discipline, and extracurricular activities. (Source: Official school website)"; 
-    reply += " For full details see: https://www.sanskarjaipur.com/"; 
+  // GREETINGS
+  if (q.includes("hi") || q.includes("hello") || q.includes("hey")) {
+    reply = "Hello! How may I help you with information about Sanskar School Jaipur? Official website: https://www.sanskarjaipur.com/";
   }
+  else if (q.includes("thank")) {
+    reply = "You are welcome. For more details, please visit the official website: https://www.sanskarjaipur.com/";
+  }
+  else if (q.includes("welcome")) {
+    reply = "Thank you. For accurate school information, refer to https://www.sanskarjaipur.com/";
+  }
+
+  // ABOUT SCHOOL
+  else if (q.includes("about")) {
+    reply = "Sanskar School Jaipur is a co-educational English-medium senior secondary school established in 2002 and affiliated with CBSE, New Delhi. It focuses on academic excellence, discipline, and holistic development. Source: https://www.sanskarjaipur.com/";
+  }
+
   // PRINCIPAL
   else if (q.includes("principal")) {
-    reply = "The Principal of Sanskar School Jaipur is Mrs. Neelam Bhardwaj, M.Com., B.Ed. She leads the academic and administrative functions of the school. (Source: CBSE public disclosure)"; 
-    reply += " See: https://www.sanskarjaipur.com/about-us/cbse-corner/";
+    reply = "The Principal of Sanskar School Jaipur is Mrs. Neelam Bhardwaj (M.Com., B.Ed.). Source: https://www.sanskarjaipur.com/about-us/cbse-corner/";
   }
-  // ADDRESS & CONTACT
+
+  // ADDRESS
   else if (q.includes("address") || q.includes("location")) {
-    reply = "Sanskar School Jaipur is located at 117‑121 Vishwamitra Marg, Hanuman Nagar Ext., Sirsi Road, Jaipur – 302012, Rajasthan, India. Contact: 0141‑2246189 / 0141‑2357844, Email: info@sanskarjaipur.com. (Source: CBSE public disclosure)"; 
-    reply += " Official: https://www.sanskarjaipur.com/about-us/cbse-corner/";
+    reply = "Sanskar School Jaipur is located at 117–121, Vishwamitra Marg, Hanuman Nagar Extension, Sirsi Road, Jaipur – 302012, Rajasthan, India. Source: https://www.sanskarjaipur.com/about-us/cbse-corner/";
   }
-  // AFFILIATION & BOARD INFO
-  else if (q.includes("affiliation") || q.includes("board")) {
-    reply = "Sanskar School Jaipur is affiliated with the Central Board of Secondary Education (CBSE), Affiliation Number 1730236, School Code 10577. (Source: CBSE mandatory public disclosure)"; 
-    reply += " See: https://www.sanskarjaipur.com/about-us/cbse-corner/";
+
+  // CONTACT
+  else if (q.includes("contact") || q.includes("phone") || q.includes("email")) {
+    reply = "Contact details: Phone – 0141-2246189 / 0141-2357844, Email – info@sanskarjaipur.com. Source: https://www.sanskarjaipur.com/about-us/cbse-corner/";
   }
+
+  // BOARD / AFFILIATION
+  else if (q.includes("board") || q.includes("affiliation")) {
+    reply = "Sanskar School Jaipur is affiliated with CBSE (Affiliation No. 1730236, School Code 10577). Source: https://www.sanskarjaipur.com/about-us/cbse-corner/";
+  }
+
   // CURRICULUM
   else if (q.includes("curriculum") || q.includes("classes")) {
-    reply = "The school follows the CBSE curriculum from Nursery to Class XII. The curriculum emphasizes conceptual understanding, hands‑on experiences, and preparation for secondary and senior secondary examinations. Medium of instruction is English. (Source: Official PDF curriculum)"; 
-    reply += " See: https://www.sanskarjaipur.com/";
+    reply = "The school follows the CBSE curriculum from Nursery to Class XII with English as the medium of instruction. Source: https://www.sanskarjaipur.com/";
   }
-  // MISSION & PHILOSOPHY
-  else if (q.includes("mission") || q.includes("philosophy")) {
-    reply = "Sanskar School Jaipur aims to develop intellectual, emotional, social, and psychomotor domains of students, fostering leadership, social skills, and critical thinking as part of its mission. (Source: Official About Us page)"; 
-    reply += " More: https://www.sanskarjaipur.com/about-us/";
-  }
+
   // FACILITIES
-  else if (q.includes("facility") || q.includes("infrastructure") || q.includes("labs")) {
-    reply = "The school provides classrooms with interactive technology, well‑equipped labs (physics, chemistry, biology), libraries, auditoriums, art rooms, sports grounds including basketball, cricket, and football, supporting both scholastic and co‑scholastic development. (Source: Official Academics page)"; 
-    reply += " See: https://www.sanskarjaipur.com/academics/";
+  else if (q.includes("facility") || q.includes("infrastructure")) {
+    reply = "Facilities include smart classrooms, science labs, library, sports grounds, activity rooms, and co-curricular programs. Source: https://www.sanskarjaipur.com/academics/";
   }
+
   // ADMISSION
   else if (q.includes("admission")) {
-    reply = "For current session admissions at Sanskar School Jaipur, parents should visit the school office or refer to the official website for form details and updates. (Source: Official site)"; 
-    reply += " Official: https://www.sanskarjaipur.com/";
+    reply = "Admissions are subject to seat availability. Parents should visit the school office or check the official website for updates. Source: https://www.sanskarjaipur.com/";
   }
-  // GENERAL CONTACT
-  else if (q.includes("contact") || q.includes("phone") || q.includes("email")) {
-    reply = "Official contact details: Phone 0141‑2246189 / 0141‑2357844, Email info@sanskarjaipur.com. Refer to the official contact page for updates. (Source: CBSE mandatory public disclosure)"; 
-    reply += " See: https://www.sanskarjaipur.com/about-us/cbse-corner/";
+
+  // SCHOOL TIMINGS (DAY-WISE)
+  else if (q.includes("timing") || q.includes("time")) {
+    reply = "School Timings (General): Monday to Friday – Morning to early afternoon. Saturday – Working as per academic calendar. Sunday – Holiday. Exact timings may vary by class. Source: https://www.sanskarjaipur.com/";
   }
-  // FALLBACK REFERENCE
+  else if (q.includes("monday")) {
+    reply = "Monday: School operates during regular morning hours. Source: https://www.sanskarjaipur.com/";
+  }
+  else if (q.includes("tuesday")) {
+    reply = "Tuesday: School operates during regular morning hours. Source: https://www.sanskarjaipur.com/";
+  }
+  else if (q.includes("wednesday")) {
+    reply = "Wednesday: School operates during regular morning hours. Source: https://www.sanskarjaipur.com/";
+  }
+  else if (q.includes("thursday")) {
+    reply = "Thursday: School operates during regular morning hours. Source: https://www.sanskarjaipur.com/";
+  }
+  else if (q.includes("friday")) {
+    reply = "Friday: School operates during regular morning hours. Source: https://www.sanskarjaipur.com/";
+  }
+  else if (q.includes("saturday")) {
+    reply = "Saturday: Working day as per academic calendar and school notice. Source: https://www.sanskarjaipur.com/";
+  }
+  else if (q.includes("sunday")) {
+    reply = "Sunday: School remains closed. Source: https://www.sanskarjaipur.com/";
+  }
+
+  // FALLBACK
   else {
-    reply = "I don’t have specific information on that. For accurate details, please visit the official Sanskar School Jaipur website: https://www.sanskarjaipur.com/";
+    reply = "This information is not available here. Please refer to the official Sanskar School Jaipur website for accurate details: https://www.sanskarjaipur.com/";
   }
 
   chat.innerHTML += `<p><b>Bot:</b> ${reply}</p>`;
