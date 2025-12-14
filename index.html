@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Sanskar School Jaipur Chatbot</title>
+<title>Sanskar School Jaipur Master Chatbot</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: #f2f2f2;
+  background: #f2f4f7;
 }
 
 header {
@@ -19,38 +19,26 @@ header {
   padding: 20px;
 }
 
-header h1 {
-  margin: 0;
-}
-
-header p {
-  margin: 5px 0 0;
-}
-
 .hero {
   width: 100%;
-  height: 300px;
+  height: 250px;
   background: url("https://images.unsplash.com/photo-1580582932707-520aed937b7b") center/cover no-repeat;
 }
 
 .chatbox {
   max-width: 900px;
-  margin: -50px auto 20px;
+  margin: -40px auto 30px;
   background: white;
   border-radius: 10px;
   padding: 20px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  box-shadow: 0 0 8px rgba(0,0,0,0.2);
 }
 
 .chat-area {
-  height: 300px;
+  height: 350px;
   overflow-y: auto;
-  border: 1px solid #ddd;
+  border: 1px solid #ccc;
   padding: 10px;
-}
-
-.chat-area p {
-  margin: 10px 0;
 }
 
 .input-area {
@@ -58,21 +46,20 @@ header p {
   margin-top: 10px;
 }
 
-.input-area input {
+input {
   flex: 1;
-  padding: 10px;
+  padding: 12px;
   font-size: 16px;
 }
 
-.input-area button {
-  padding: 10px 15px;
+button {
+  padding: 12px 18px;
   background: #003366;
   color: white;
   border: none;
   cursor: pointer;
 }
-
-.input-area button:hover {
+button:hover {
   background: #0055aa;
 }
 </style>
@@ -82,18 +69,19 @@ header p {
 
 <header>
   <h1>Sanskar School Jaipur</h1>
-  <p>Master School Information Chatbot</p>
+  <p>Master Information Chatbot</p>
 </header>
 
 <div class="hero"></div>
 
 <div class="chatbox">
   <div class="chat-area" id="chat">
-    <p><b>Bot:</b> Hello! Ask me about Sanskar School Jaipur.</p>
+    <p><b>Bot:</b> Hello! Ask me anything about Sanskar School Jaipur.</p>
+    <p><b>Bot:</b> Example topics: principal, address, mission, curriculum, facilities, contact.</p>
   </div>
 
   <div class="input-area">
-    <input type="text" id="userInput" placeholder="Ask anything about Sanskar School Jaipur">
+    <input type="text" id="userInput" placeholder="Type your question here...">
     <button onclick="send()">Send</button>
   </div>
 </div>
@@ -104,29 +92,60 @@ function send() {
   const chat = document.getElementById("chat");
   const q = input.value.trim().toLowerCase();
 
-  if (q === "") return;
+  if (!q) return;
 
   chat.innerHTML += `<p><b>You:</b> ${input.value}</p>`;
 
-  let reply = "Please contact the school office for detailed and updated information.";
+  let reply = "";
 
-  if (q.includes("principal")) {
-    reply = "The Principal of Sanskar School Jaipur is Mrs. Neelam Bhardwaj.";
+  // SCHOOL SUMMARY
+  if (q.includes("about school") || q.includes("what is sanskar school")) {
+    reply = "Sanskar School Jaipur is a co‑educational English‑medium senior secondary school established in April 2002 and affiliated to the Central Board of Secondary Education (CBSE), New Delhi. It focuses on holistic student development through academics, values, discipline, and extracurricular activities. (Source: Official school website)"; 
+    reply += " For full details see: https://www.sanskarjaipur.com/"; 
   }
-  else if (q.includes("timing") || q.includes("time")) {
-    reply = "The school generally operates from morning to early afternoon on working days.";
+  // PRINCIPAL
+  else if (q.includes("principal")) {
+    reply = "The Principal of Sanskar School Jaipur is Mrs. Neelam Bhardwaj, M.Com., B.Ed. She leads the academic and administrative functions of the school. (Source: CBSE public disclosure)"; 
+    reply += " See: https://www.sanskarjaipur.com/about-us/cbse-corner/";
   }
-  else if (q.includes("admission")) {
-    reply = "Admissions are offered for selected classes. Parents should visit the school office for admission details.";
-  }
+  // ADDRESS & CONTACT
   else if (q.includes("address") || q.includes("location")) {
-    reply = "Sanskar School is located in Jaipur, Rajasthan.";
+    reply = "Sanskar School Jaipur is located at 117‑121 Vishwamitra Marg, Hanuman Nagar Ext., Sirsi Road, Jaipur – 302012, Rajasthan, India. Contact: 0141‑2246189 / 0141‑2357844, Email: info@sanskarjaipur.com. (Source: CBSE public disclosure)"; 
+    reply += " Official: https://www.sanskarjaipur.com/about-us/cbse-corner/";
   }
-  else if (q.includes("contact") || q.includes("phone")) {
-    reply = "You may contact the school office during working hours for official inquiries.";
+  // AFFILIATION & BOARD INFO
+  else if (q.includes("affiliation") || q.includes("board")) {
+    reply = "Sanskar School Jaipur is affiliated with the Central Board of Secondary Education (CBSE), Affiliation Number 1730236, School Code 10577. (Source: CBSE mandatory public disclosure)"; 
+    reply += " See: https://www.sanskarjaipur.com/about-us/cbse-corner/";
   }
-  else if (q.includes("about")) {
-    reply = "Sanskar School Jaipur is known for quality education and holistic development of students.";
+  // CURRICULUM
+  else if (q.includes("curriculum") || q.includes("classes")) {
+    reply = "The school follows the CBSE curriculum from Nursery to Class XII. The curriculum emphasizes conceptual understanding, hands‑on experiences, and preparation for secondary and senior secondary examinations. Medium of instruction is English. (Source: Official PDF curriculum)"; 
+    reply += " See: https://www.sanskarjaipur.com/";
+  }
+  // MISSION & PHILOSOPHY
+  else if (q.includes("mission") || q.includes("philosophy")) {
+    reply = "Sanskar School Jaipur aims to develop intellectual, emotional, social, and psychomotor domains of students, fostering leadership, social skills, and critical thinking as part of its mission. (Source: Official About Us page)"; 
+    reply += " More: https://www.sanskarjaipur.com/about-us/";
+  }
+  // FACILITIES
+  else if (q.includes("facility") || q.includes("infrastructure") || q.includes("labs")) {
+    reply = "The school provides classrooms with interactive technology, well‑equipped labs (physics, chemistry, biology), libraries, auditoriums, art rooms, sports grounds including basketball, cricket, and football, supporting both scholastic and co‑scholastic development. (Source: Official Academics page)"; 
+    reply += " See: https://www.sanskarjaipur.com/academics/";
+  }
+  // ADMISSION
+  else if (q.includes("admission")) {
+    reply = "For current session admissions at Sanskar School Jaipur, parents should visit the school office or refer to the official website for form details and updates. (Source: Official site)"; 
+    reply += " Official: https://www.sanskarjaipur.com/";
+  }
+  // GENERAL CONTACT
+  else if (q.includes("contact") || q.includes("phone") || q.includes("email")) {
+    reply = "Official contact details: Phone 0141‑2246189 / 0141‑2357844, Email info@sanskarjaipur.com. Refer to the official contact page for updates. (Source: CBSE mandatory public disclosure)"; 
+    reply += " See: https://www.sanskarjaipur.com/about-us/cbse-corner/";
+  }
+  // FALLBACK REFERENCE
+  else {
+    reply = "I don’t have specific information on that. For accurate details, please visit the official Sanskar School Jaipur website: https://www.sanskarjaipur.com/";
   }
 
   chat.innerHTML += `<p><b>Bot:</b> ${reply}</p>`;
