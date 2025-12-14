@@ -2,74 +2,103 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Sanskar School Jaipur – Master Chatbot</title>
+<title>Sanskar School Jaipur - Master Chatbot</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 body {
-    font-family: Arial, sans-serif;
-    background: #f4f6f9;
-    margin: 0;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f4f6f8;
 }
 
 header {
-    background: #1e3c72;
-    color: white;
-    padding: 15px;
-    text-align: center;
+  background: #003366;
+  color: white;
+  padding: 15px;
+  text-align: center;
+}
+
+header h1 {
+  margin: 5px 0;
+}
+
+.slider {
+  width: 100%;
+  height: 250px;
+  overflow: hidden;
+  position: relative;
+}
+
+.slider img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  position: absolute;
+  animation: slide 12s infinite;
+  opacity: 0;
+}
+
+.slider img:nth-child(1) { animation-delay: 0s; }
+.slider img:nth-child(2) { animation-delay: 4s; }
+.slider img:nth-child(3) { animation-delay: 8s; }
+
+@keyframes slide {
+  0% {opacity: 0;}
+  10% {opacity: 1;}
+  30% {opacity: 1;}
+  40% {opacity: 0;}
+  100% {opacity: 0;}
 }
 
 .chatbox {
-    width: 100%;
-    max-width: 600px;
-    margin: 20px auto;
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.2);
-    overflow: hidden;
+  max-width: 800px;
+  margin: 20px auto;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
 .chat-area {
-    height: 400px;
-    overflow-y: auto;
-    padding: 15px;
+  height: 350px;
+  overflow-y: auto;
+  padding: 15px;
+  border-bottom: 1px solid #ccc;
 }
 
-.bot, .user {
-    margin: 10px 0;
-    padding: 10px;
-    border-radius: 8px;
-    max-width: 85%;
-}
-
-.bot {
-    background: #e8f0fe;
+.message {
+  margin: 10px 0;
 }
 
 .user {
-    background: #d1ffd6;
-    margin-left: auto;
-    text-align: right;
+  text-align: right;
+  color: #003366;
+  font-weight: bold;
+}
+
+.bot {
+  text-align: left;
+  color: #222;
 }
 
 .input-area {
-    display: flex;
-    border-top: 1px solid #ccc;
+  display: flex;
 }
 
-input {
-    flex: 1;
-    padding: 10px;
-    border: none;
-    outline: none;
+.input-area input {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  font-size: 16px;
 }
 
-button {
-    padding: 10px 15px;
-    border: none;
-    cursor: pointer;
-    background: #1e3c72;
-    color: white;
+.input-area button {
+  padding: 12px 20px;
+  border: none;
+  background: #003366;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
 }
 </style>
 </head>
@@ -77,25 +106,48 @@ button {
 <body>
 
 <header>
-    <h2>Sanskar School Jaipur</h2>
-    <p>Master School Chatbot</p>
+  <h1>Sanskar School Jaipur</h1>
+  <p>Master School Information Chatbot</p>
 </header>
 
-<div class="chatbox">
-    <div class="chat-area" id="chat"></div>
+<div class="slider">
+  <img src="https://images.unsplash.com/photo-1580582932707-520aed937b7b">
+  <img src="https://images.unsplash.com/photo-1596495578065-6e0763fa1178">
+  <img src="https://images.unsplash.com/photo-1606760227091-3dd870d97f1d">
+</div>
 
-    <div class="input-area">
-        <input type="text" id="userInput" placeholder="Ask anything about Sanskar School Jaipur">
-        <button onclick="send()">Send</button>
-        <button onclick="voice()">🎤</button>
-    </div>
+<div class="chatbox">
+  <div class="chat-area" id="chat"></div>
+
+  <div class="input-area">
+    <input type="text" id="userInput" placeholder="Ask about Sanskar School Jaipur...">
+    <button onclick="send()">Send</button>
+  </div>
 </div>
 
 <script>
-const GROQ_API_KEY = "gsk_XXXXXXXX";
+const GROQ_API_KEY = "PASTE_YOUR_GROQ_API_KEY_HERE";
 
-/* ===== GROQ AI FUNCTION ===== */
-async function groqAI(question) {
+const chat = document.getElementById("chat");
+
+function addMessage(text, className) {
+  const div = document.createElement("div");
+  div.className = "message " + className;
+  div.innerText = text;
+  chat.appendChild(div);
+  chat.scrollTop = chat.scrollHeight;
+}
+
+async function send() {
+  const input = document.getElementById("userInput");
+  const question = input.value.trim();
+  if (!question) return;
+
+  addMessage(question, "user");
+  input.value = "";
+
+  addMessage("Typing...", "bot");
+
   try {
     const response = await fetch(
       "https://api.groq.com/openai/v1/chat/completions",
@@ -110,7 +162,8 @@ async function groqAI(question) {
           messages: [
             {
               role: "system",
-              content: "You are a helpful school assistant for Sanskar School Jaipur."
+              content:
+                "You are a master school chatbot for Sanskar School Jaipur. Provide clear, polite, student-friendly answers. If exact data is unknown, respond professionally without guessing."
             },
             {
               role: "user",
@@ -122,19 +175,15 @@ async function groqAI(question) {
     );
 
     const data = await response.json();
-    return data.choices[0].message.content;
+    chat.lastChild.remove();
+    addMessage(data.choices[0].message.content, "bot");
 
   } catch (error) {
-    return "Sorry, AI service is temporarily unavailable.";
+    chat.lastChild.remove();
+    addMessage("Error connecting to AI service.", "bot");
   }
 }
 </script>
 
-
 </body>
 </html>
-
-
-
-
-
